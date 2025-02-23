@@ -20,11 +20,21 @@
         }
         .text {
             font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="text">13.3.2025——Milan</div>
-    <div class="text">Bring your phone, bring it charged.</div>
+    <div class="text" onclick="toggleText()">13.3.2025——Milan</div>
+    <script>
+        function toggleText() {
+            const textElement = document.querySelector('.text');
+            if (textElement.innerText === "13.3.2025——Milan") {
+                textElement.innerText = "Bring your phone, bring it charged";
+            } else {
+                textElement.innerText = "13.3.2025——Milan";
+            }
+        }
+    </script>
 </body>
 </html>
