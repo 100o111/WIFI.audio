@@ -25,14 +25,16 @@
     </style>
 </head>
 <body>
-    <div class="text" onclick="toggleText()">13.3.2025——Milan</div>
+    <div class="text" onclick="toggleText()">13.3.2025——C3 Milan</div>
     <script>
         function toggleText() {
             const textElement = document.querySelector('.text');
-            if (textElement.innerText === "13.3.2025——Milan") {
+            if (textElement.innerText === "13.3.2025——C3 Milan") {
                 textElement.innerText = "Bring your phone, bring it charged.";
+            } else if (textElement.innerText === "Bring your phone, bring it charged.") {
+                textElement.innerText = "😂📲";
             } else {
-                textElement.innerText = "13.3.2025——Milan";
+                textElement.innerText = "13.3.2025——C3 Milan";
             }
         }
     </script>
