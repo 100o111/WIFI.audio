@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📲</title>
-    <style>
-        @font-face {
-            font-family: 'SF Pro';
-            src: url('https://developer.apple.com/fonts/SF-Pro.ttf');
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #ffffff;
-            margin: 0;
-            font-family: 'SF Pro', sans-serif;
-        }
-        .text {
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📲</title>
+  <style>
+    @font-face {
+      font-family: 'SF Pro';
+      src: url('https://developer.apple.com/fonts/SF-Pro.ttf');
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      background-color: #ffffff;
+      font-family: 'SF Pro', sans-serif;
+      font-size: 16px;
+      padding: 2rem;
+      padding-bottom: 5rem;
+      box-sizing: border-box;
+    }
+    .text {
+      max-width: 500px;
+      line-height: 1.4;
+      text-align: left;
+    }
+  </style>
 </head>
 <body>
-    <div class="text" onclick="toggleText()">13.3.2025——C3 Milan</div>
-    <script>
-        function getRandomEmoji() {
-            return Math.random() < 0.5 ? "🫢📲" : "😂📲";
-        }
-        
-        function toggleText() {
-            const textElement = document.querySelector('.text');
-            if (textElement.innerText === "13.3.2025——C3 Milan") {
-                textElement.innerText = "Bring your phone";
-            } else if (textElement.innerText === "Bring your phone") {
-                textElement.innerText = getRandomEmoji();
-            } else {
-                textElement.innerText = "13.3.2025——C3 Milan";
-            }
-        }
-    </script>
+  <div class="text">
+    https://wifi.audio is a sound installation and performance by Eyal Talmor and Mika Ben Amar, where mobile phones become nodes in a networked sonic field. Through a Wi-Fi network, sound is distributed, spatialized, and dynamically reshaped across devices, forming a continuously shifting composition. Blurring the boundary between audience, performer, and technological infrastructure, the project explores how collective presence transforms an ephemeral, networked soundscape.
+  </div>
 </body>
 </html>
