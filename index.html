@@ -9,53 +9,52 @@
       font-family: 'SF Pro';
       src: url('https://developer.apple.com/fonts/SF-Pro.ttf');
     }
+
     html, body {
       height: 100%;
-      overflow: hidden;
       margin: 0;
-      padding: 0;
     }
+
+    /* 1–2. stack items vertically, center them */
     body {
       display: flex;
+      flex-direction: column;     /* ← change */
+      align-items: center;        /* ← center horizontally */
       justify-content: flex-start;
-      align-items: flex-end;
-      background-color: #ffffff;
+      background: #fff;
       font-family: 'SF Pro', sans-serif;
       font-size: 16px;
-      padding: 2rem;
-      padding-bottom: 5rem;
+      padding: 2rem 2rem 5rem;
       box-sizing: border-box;
-      flex-direction: column;
-      /* align-items: center; */
     }
-    iframe {
-      max-width: 100%;
-      height: auto;
+
+    /* 3. gap below the video */
+    .video-wrapper {
+      margin-bottom: 2rem;
     }
-    .spacer {
-      height: 3rem; /* Adjust space between video and text */
-    }
+
     .text {
       max-width: 500px;
       line-height: 1.4;
       text-align: left;
     }
-    a {
-      color: #000;
-    }
+
+    a { color: #000; }
   </style>
 </head>
 <body>
-  <div align="center">
-    <iframe src="https://player.vimeo.com/video/1076425318?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-      width="1024" height="540" frameborder="0" allow="autoplay;
-      fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-      title="EYAL TALMOR + MIKA BEN AMAR"></iframe>
+  <div class="video-wrapper">
+    <iframe
+      src="https://player.vimeo.com/video/1076425318?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+      width="1024" height="540" frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+      title="EYAL TALMOR + MIKA BEN AMAR">
+    </iframe>
   </div>
-  <div class="spacer"></div>
+
   <div class="text">
     https://wifi.audio is a sound installation and performance by Eyal Talmor and Mika Ben Amar, where mobile phones become nodes in a networked sonic field. Through a Wi-Fi network, sound is distributed, spatialized, and dynamically reshaped across devices, forming a continuously shifting composition. Blurring the boundary between audience, performer, and technological infrastructure, the project explores how collective presence transforms an ephemeral, networked soundscape.<br/>
-    Next performance: 29.5.2025 <a href="https://www.instagram.com/p/DJov3jPII1X/">The Lodge, Berlin</a>
+    Next performance: 29 May 2025 — <a href="https://www.instagram.com/p/DJov3jPII1X/">The Lodge, Berlin</a>
   </div>
 </body>
 </html>
