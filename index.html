@@ -1,62 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>📲</title>
-  <style>
-    @font-face {
-      font-family: 'SF Pro';
-      src: url('https://developer.apple.com/fonts/SF-Pro.ttf');
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>📲</title>
+<style>
+  @font-face {
+    font-family: 'SF Pro';
+    src: url('https://developer.apple.com/fonts/SF-Pro.ttf');
+  }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
+  /* Layout basics -------------------------------------------------------- */
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;         /* centre the video */
+    justify-content: flex-start;
+    background: #fff;
+    font-family: 'SF Pro', sans-serif;
+    font-size: 16px;
+    padding: 2rem 2rem 5rem;
+    box-sizing: border-box;
+    overflow-x: hidden;          /* kill sideways scroll, allow vertical */
+  }
 
-    /* 1–2. stack items vertically, center them */
-    body {
-      display: flex;
-      flex-direction: column;     /* ← change */
-      align-items: center;        /* ← center horizontally */
-      justify-content: flex-start;
-      background: #fff;
-      font-family: 'SF Pro', sans-serif;
-      font-size: 16px;
-      padding: 2rem 2rem 5rem;
-      box-sizing: border-box;
-      overflow-x: hidden;
-    }
+  /* --------------- 2-A  Modern aspect-ratio approach ------------------- */
+  .video-wrapper {
+    width: 100%;
+    max-width: 1024px;           /* same desktop width you had before   */
+    aspect-ratio: 16 / 9;        /* keeps the height in sync everywhere */
+    margin-bottom: 2rem;
+  }
+  .video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
 
-    /* 3. gap below the video */
+  /* -------- 2-B  Fallback for older Safari/Chrome (≤ v14, v85) --------- */
+  @supports not (aspect-ratio: 1) {
     .video-wrapper {
-      width: 100%;
-      max-width: 1024px;
-      aspect-ratio: 16 / 9;
-      margin-bottom: 2rem;
+      position: relative;
+      height: 0;
+      padding-top: 56.25%;      /* 16 ÷ 9 = 0.5625 → 56.25% */
     }
-
-    iframe {
-      max-width: 100%;
-      height: auto;
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;                 /* top:0 right:0 bottom:0 left:0 */
     }
+  }
 
-    .text {
-      max-width: 500px;
-      line-height: 1.4;
-      text-align: left;
-      align-self: flex-start;
-    }
-
-    a { color: #000; }
-  </style>
+  /* Copy block ----------------------------------------------------------- */
+  .text {
+    max-width: 500px;
+    line-height: 1.4;
+    text-align: left;
+    align-self: flex-start;      /* hug the left margin */
+  }
+  a { color: #000; }
+</style>
 </head>
 <body>
+
   <div class="video-wrapper">
     <iframe
-      src="https://player.vimeo.com/video/1076425318?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-      width="1024" height="540" frameborder="0"
+      src="https://player.vimeo.com/video/1076425318?badge=0&autopause=0&player_id=0&app_id=58479"
       allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
       title="EYAL TALMOR + MIKA BEN AMAR">
     </iframe>
@@ -66,5 +75,6 @@
     https://wifi.audio is a sound installation and performance by Eyal Talmor and Mika Ben Amar, where mobile phones become nodes in a networked sonic field. Through a Wi-Fi network, sound is distributed, spatialized, and dynamically reshaped across devices, forming a continuously shifting composition. Blurring the boundary between audience, performer, and technological infrastructure, the project explores how collective presence transforms an ephemeral, networked soundscape.<br/>
     Next performance: 29 May 2025 — <a href="https://www.instagram.com/p/DJov3jPII1X/">The Lodge, Berlin</a>
   </div>
+
 </body>
 </html>
