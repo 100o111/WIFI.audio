@@ -10,26 +10,27 @@
     src: url('https://developer.apple.com/fonts/SF-Pro.ttf');
   }
 
+  /* Layout basics -------------------------------------------------------- */
   html, body { height: 100%; margin: 0; }
   body {
     display: flex;
-    flex-direction: row;         /* Arrange video and text side-by-side */
-    align-items: flex-end;       /* Align to the bottom */
+    flex-direction: column;
+    align-items: center;         /* centre the video */
     justify-content: flex-start;
     background: #fff;
     font-family: 'SF Pro', sans-serif;
     font-size: 16px;
-    padding: 2rem;
+    padding: 2rem 2rem 5rem;
     box-sizing: border-box;
-    overflow-x: hidden;
-    gap: 2rem;                   /* Space between video and text */
-    height: 100vh;               /* Full viewport height */
+    overflow-x: hidden;          /* kill sideways scroll, allow vertical */
   }
 
+  /* --------------- 2-A  Modern aspect-ratio approach ------------------- */
   .video-wrapper {
-    width: 400px;
-    aspect-ratio: 16 / 9;
-    flex-shrink: 0;              /* Prevent resizing when screen is narrow */
+    width: 100%;
+    max-width: 1024px;           /* same desktop width you had before   */
+    aspect-ratio: 16 / 9;        /* keeps the height in sync everywhere */
+    margin-bottom: 2rem;
   }
   .video-wrapper iframe {
     width: 100%;
@@ -37,23 +38,25 @@
     border: 0;
   }
 
+  /* -------- 2-B  Fallback for older Safari/Chrome (≤ v14, v85) --------- */
   @supports not (aspect-ratio: 1) {
     .video-wrapper {
       position: relative;
-      width: 400px;
       height: 0;
-      padding-top: 56.25%;
+      padding-top: 56.25%;      /* 16 ÷ 9 = 0.5625 → 56.25% */
     }
     .video-wrapper iframe {
       position: absolute;
-      inset: 0;
+      inset: 0;                 /* top:0 right:0 bottom:0 left:0 */
     }
   }
 
+  /* Copy block ----------------------------------------------------------- */
   .text {
     max-width: 500px;
     line-height: 1.4;
     text-align: left;
+    align-self: flex-start;      /* hug the left margin */
   }
   a { color: #000; }
 </style>
