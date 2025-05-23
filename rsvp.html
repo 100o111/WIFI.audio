@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RSVP - wifi.audio</title>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lcw_kYrAAAAADQpj41rlNCe9ofVR4LyDdL3LsXL"></script>
 <style>
   /* Using system font stack for SF Pro look */
 
@@ -145,9 +145,9 @@
     font-size: 14px;
   }
 
-  /* reCAPTCHA styling ---------------------------------------------------- */
-  .g-recaptcha {
-    margin-bottom: 1rem;
+  /* reCAPTCHA v3 badge (bottom right) ------------------------------------ */
+  .grecaptcha-badge {
+    visibility: visible !important;
   }
 
   /* Error message -------------------------------------------------------- */
@@ -160,6 +160,19 @@
 
   .error-message.show {
     display: block;
+  }
+
+  /* Privacy notice ------------------------------------------------------- */
+  .privacy-notice {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2rem;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .privacy-notice a {
+    color: #666;
   }
 </style>
 </head>
@@ -192,8 +205,6 @@
         </label>
       </div>
 
-      <div class="g-recaptcha" data-sitekey="6Lcw_kYrAAAAADQpj41rlNCe9ofVR4LyDdL3LsXL"></div>
-
       <button type="submit">Send</button>
     </form>
 
@@ -201,6 +212,12 @@
       <strong>Thank you!</strong><br>
       Your RSVP has been received. See you on Thursday <3
     </div>
+
+    <p class="privacy-notice">
+      This site is protected by reCAPTCHA and the Google
+      <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+      <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+    </p>
   </div>
 
   <script>
@@ -223,23 +240,19 @@
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       
-      // Check if reCAPTCHA is completed
-      const recaptchaResponse = grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        alert('Please complete the reCAPTCHA verification.');
-        return;
-      }
-      
       // Disable submit button
       const submitButton = form.querySelector('button');
       submitButton.disabled = true;
       submitButton.textContent = 'Sending...';
 
-      // Collect form data
-      const formData = new FormData(form);
-      formData.append('g-recaptcha-response', recaptchaResponse);
-
       try {
+        // Get reCAPTCHA v3 token
+        const token = await grecaptcha.execute('6Lcw_kYrAAAAADQpj41rlNCe9ofVR4LyDdL3LsXL', {action: 'submit'});
+        
+        // Collect form data
+        const formData = new FormData(form);
+        formData.append('g-recaptcha-response', token);
+
         const response = await fetch(form.action, {
           method: 'POST',
           body: formData,
@@ -258,7 +271,7 @@
       } catch (error) {
         alert('Sorry, there was an error submitting your RSVP. Please try again.');
         submitButton.disabled = false;
-        submitButton.textContent = 'Send RSVP';
+        submitButton.textContent = 'Send';
       }
     });
   </script>
