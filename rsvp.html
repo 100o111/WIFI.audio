@@ -4,11 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RSVP - wifi.audio</title>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
-  @font-face {
-    font-family: 'SF Pro';
-    src: url('https://developer.apple.com/fonts/SF-Pro.ttf');
-  }
+  /* Using system font stack for SF Pro look */
 
   /* Layout basics -------------------------------------------------------- */
   html, body { height: 100%; margin: 0; }
@@ -18,7 +16,7 @@
     align-items: center;
     justify-content: flex-start;
     background: #fff;
-    font-family: 'SF Pro', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
     padding: 2rem 2rem 5rem;
     box-sizing: border-box;
@@ -41,7 +39,6 @@
   .event-info {
     margin-bottom: 2rem;
     line-height: 1.6;
-    align: center;
   }
 
   /* Form styling --------------------------------------------------------- */
@@ -148,6 +145,11 @@
     font-size: 14px;
   }
 
+  /* reCAPTCHA styling ---------------------------------------------------- */
+  .g-recaptcha {
+    margin-bottom: 1rem;
+  }
+
   /* Error message -------------------------------------------------------- */
   .error-message {
     display: none;
@@ -162,8 +164,6 @@
 </style>
 </head>
 <body>
-
-  <div class="container">
 
     <h1>RSVP</h1>
     
@@ -188,9 +188,11 @@
       <div class="checkbox-group">
         <input type="checkbox" id="privacy" name="privacy_consent" value="yes" required>
         <label for="privacy" class="checkbox-label">
-          I consent to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a> *
+          I consent to the <a href="privacypolicy.html" target="_blank">Privacy Policy</a> *
         </label>
       </div>
+
+      <div class="g-recaptcha" data-sitekey="6Lcw_kYrAAAAADQpj41rlNCe9ofVR4LyDdL3LsXL"></div>
 
       <button type="submit">Send</button>
     </form>
@@ -221,6 +223,13 @@
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       
+      // Check if reCAPTCHA is completed
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        alert('Please complete the reCAPTCHA verification.');
+        return;
+      }
+      
       // Disable submit button
       const submitButton = form.querySelector('button');
       submitButton.disabled = true;
@@ -228,6 +237,7 @@
 
       // Collect form data
       const formData = new FormData(form);
+      formData.append('g-recaptcha-response', recaptchaResponse);
 
       try {
         const response = await fetch(form.action, {
